@@ -105,5 +105,23 @@ namespace Business_Helper
                 return context.Customers.FirstOrDefault(x => x.Id == id);
             }
         }
+
+        public static void AddCustomer(Customer customer)
+        {
+            using (var context = new ContextApp())
+            {
+                context.Add(customer);
+                context.SaveChanges();
+            }
+        }
+
+        public static void AddSeller(Seller seller)
+        {
+            using (var context = new ContextApp())
+            {
+                context.Add(seller);
+                context.SaveChanges();
+            }
+        }
     }
 }
