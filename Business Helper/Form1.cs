@@ -1,4 +1,5 @@
 ﻿using Business_Helper.EF.Models;
+using Business_Helper.Excel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -176,6 +177,20 @@ namespace Business_Helper
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            ExcelWorkbook excelFile = new ExcelWorkbook();
+            string path = excelFile.NewFile();
+            MessageBox.Show(path);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            SellerForm SellerForm = new SellerForm();
+            SellerForm.Owner = this;
+            SellerForm.Show();
         }
     }
 }
