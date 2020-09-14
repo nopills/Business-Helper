@@ -18,7 +18,7 @@ namespace Business_Helper
             _itemPrice = itemPrice;
             _vatPercent = vatPercent;
         }
-        //e
+    
         public double priceWithoutVat()
         {
             //Выделить НДС (Цена товара * 100% / 100% + НДС)
