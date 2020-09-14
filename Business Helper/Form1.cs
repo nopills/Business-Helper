@@ -20,6 +20,15 @@ namespace Business_Helper
             InitializeComponent();
             AddToolStripMenuItem.Click += new EventHandler(OnAddItem);
             RemoveToolStripMenuItem.Click += new EventHandler(RemoveItem);
+
+            // Подгрузка из БД продавцов
+            comboBox1.Items.Clear();
+            comboBox1.Items.AddRange(DbEditor.GetAllSellers());
+                     
+            // Подгрузка из БД покупателей
+            comboBox2.Items.Clear();
+            comboBox2.Items.AddRange(DbEditor.GetAllCustomers());          
+            
             //contextMenu.Click += new EventHandler(OnAddItem);
         }
 
@@ -191,6 +200,19 @@ namespace Business_Helper
             SellerForm SellerForm = new SellerForm();
             SellerForm.Owner = this;
             SellerForm.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            CustomerForm CustomerForm = new CustomerForm();
+            CustomerForm.Owner = this;
+            CustomerForm.Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Seller seller = DbEditor.GetSellerById(1);
+            textBox1.Text += seller.Name;
         }
     }
 }

@@ -12,6 +12,8 @@ namespace Business_Helper.EF.Models
     {
         public  DbSet<Product> Products { get; set; }
         public DbSet<Unit> Units { get; set; }
+        public DbSet<Seller> Sellers { get; set; }
+        public DbSet<Customer> Customers { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite("Data Source=BH.db");
 
     }

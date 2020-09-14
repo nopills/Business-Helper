@@ -2,14 +2,16 @@
 using Business_Helper.EF.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Business_Helper.Migrations
 {
     [DbContext(typeof(ContextApp))]
-    partial class ContextAppModelSnapshot : ModelSnapshot
+    [Migration("20200914083251_Init4")]
+    partial class Init4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -73,5 +73,37 @@ namespace Business_Helper
                 return context.Units.Select(x => x.Name).ToArray();
             }
         }
+
+        public static string[] GetAllSellers()
+        {
+            using (var context = new ContextApp())
+            {
+                return context.Sellers.Select(x => x.Name).ToArray();
+            }
+        }
+
+        public static string[] GetAllCustomers()
+        {
+            using (var context = new ContextApp())
+            {
+                return context.Customers.Select(x => x.Name).ToArray();
+            }
+        }
+
+        public static Seller GetSellerById(int id)
+        {
+            using (var context = new ContextApp())
+            {
+                return context.Sellers.FirstOrDefault(x => x.Id == id);
+            }
+        }
+
+        public static Customer GetCustomerById(int id)
+        {
+            using (var context = new ContextApp())
+            {
+                return context.Customers.FirstOrDefault(x => x.Id == id);
+            }
+        }
     }
 }
