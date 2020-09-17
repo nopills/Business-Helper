@@ -193,9 +193,9 @@ namespace Business_Helper
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            ExcelWorkbook excelFile = new ExcelWorkbook();
-            string path = excelFile.NewFile();
-            MessageBox.Show(path);
+            //ExcelWorkbook excelFile = new ExcelWorkbook();
+            //string path = excelFile.NewFile();
+           // MessageBox.Show(path);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -214,31 +214,60 @@ namespace Business_Helper
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Seller seller = DbEditor.GetSellerById(1);
-            textBox1.Text += seller.Name;
+            textBox1.Text = comboBox1.SelectedIndex.ToString();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            string examplePath = Directory.CreateDirectory(Application.StartupPath + "/Example").FullName;
-            
-            if (!File.Exists("Factura.xlsx"))
-            {            
-                File.WriteAllBytes($"{examplePath}/Factura.xlsx", Resource.Factura);               
-            }
-
-            ExcelWorkbook WorkBook = new ExcelWorkbook(examplePath);
-
-            using (SaveFileDialog SaveFileDialog = new SaveFileDialog())
+            int sellerId = comboBox1.SelectedIndex + 1;
+            int customerId = comboBox2.SelectedIndex + 1;
+            if (sellerId <= 0 && customerId <= 0)
             {
-                SaveFileDialog.Filter = "Файлы Excel (*.xls; *.xlsx) | *.xls; *.xlsx";
-                if (SaveFileDialog.ShowDialog() == DialogResult.OK)
+                MessageBox.Show("Выберите продавца и покупателя из существующих или добавьте новых.", "Внимание",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);           
+            }
+            else
+            {
+                string examplePath = Directory.CreateDirectory(Application.StartupPath + "/Example").FullName;
+                string filePath;
+               
+                if (!File.Exists($"{examplePath}/Factura.xlsx"))
                 {
-                    string FilePath = SaveFileDialog.FileName;
+                    File.WriteAllBytes($"{examplePath}/Factura.xlsx", Resource.Factura);
+                }
+
+                Seller Seller = DbEditor.GetSellerById(sellerId);
+                Customer Customer = DbEditor.GetCustomerById(customerId);
+                
+                ExcelWorkbook WorkBook = new ExcelWorkbook($"{examplePath}/Factura.xlsx", Seller, Customer);
+        
+              
+                WorkBook.facturaNumber = numericUpDown1.Value.ToString();
+                WorkBook.facturaDate = dateTimePicker1.Value.ToString("dd MMMM yyyy");
+                WorkBook.payDocumentNumber = numericUpDown2.Value.ToString();
+                WorkBook.payDocumentDate = dateTimePicker2.Value.ToString("dd MMMM yyyy"); ;
+                WorkBook.currencyCode = "643";
+                WorkBook.Currency = "Российский рубль";
+
+
+                using (SaveFileDialog SaveFileDialog = new SaveFileDialog())
+                {
+                    SaveFileDialog.Filter = "Файлы Excel (*.xlsx) | *.xlsx";
+                    if (SaveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        filePath = SaveFileDialog.FileName;
+                        if (WorkBook.CreateFile(filePath) == null)
+                        {
+                            throw new Exception("Ошибка создания файла");
+                        }
+                    }
                 }
             }
-            
-                    
+           
+
+           
+                
         }
 
         private void button6_Click_1(object sender, EventArgs e)
