@@ -225,9 +225,10 @@ namespace Business_Helper
         {
             int sellerId = comboBox1.SelectedIndex + 1;
             int customerId = comboBox2.SelectedIndex + 1;
-            if (sellerId <= 0 && customerId <= 0)
+            int currencyId = comboBox3.SelectedIndex + 1;
+            if (sellerId <= 0 && customerId <= 0 && currencyId <= 0)
             {
-                MessageBox.Show("Выберите продавца и покупателя из существующих или добавьте новых.", "Внимание",
+                MessageBox.Show("Выберите продавца, покупателя и валюту из существующих или добавьте новые.", "Внимание",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);           
             }
@@ -243,6 +244,7 @@ namespace Business_Helper
 
                 Seller Seller = DbEditor.GetSellerById(sellerId);
                 Customer Customer = DbEditor.GetCustomerById(customerId);
+                Currency Currency = DbEditor.GetCurrencyById(currencyId);
                 
                 ExcelWorkbook WorkBook = new ExcelWorkbook($"{examplePath}/Factura.xlsx", Seller, Customer);
         
@@ -251,8 +253,8 @@ namespace Business_Helper
                 WorkBook.facturaDate = dateTimePicker1.Value.ToString("dd MMMM yyyy");
                 WorkBook.payDocumentNumber = numericUpDown2.Value.ToString();
                 WorkBook.payDocumentDate = dateTimePicker2.Value.ToString("dd MMMM yyyy"); ;
-                WorkBook.currencyCode = "643";
-                WorkBook.Currency = "Российский рубль";
+                WorkBook.currencyCode = Currency.Code;
+                WorkBook.Currency = Currency.Name;
 
 
                 using (SaveFileDialog SaveFileDialog = new SaveFileDialog())
