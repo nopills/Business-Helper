@@ -123,5 +123,30 @@ namespace Business_Helper
                 context.SaveChanges();
             }
         }
+
+        public static void AddCurrency(Currency currency)
+        {
+            using (var context = new ContextApp())
+            {
+                context.Add(currency);
+                context.SaveChanges();
+            }
+        }
+
+
+        public static string[] GetAllCurrency()
+        {
+            using (var context = new ContextApp())
+            {
+                return context.Customers.Select(x => x.Name).ToArray();
+            }
+        }
+        public static Currency GetCurrencyById(int id)
+        {
+            using (var context = new ContextApp())
+            {
+                return context.Currencies.FirstOrDefault(x => x.Id == id);
+            }
+        }
     }
 }

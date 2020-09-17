@@ -192,6 +192,7 @@
     </Compile>
     <Compile Include="DbEditor.cs" />
     <Compile Include="EF\Models\ContextApp.cs" />
+    <Compile Include="EF\Models\Currency.cs" />
     <Compile Include="EF\Models\Customer.cs" />
     <Compile Include="EF\Models\Product.cs" />
     <Compile Include="EF\Models\Seller.cs" />
@@ -218,6 +219,10 @@
     <Compile Include="Migrations\20200914083251_Init4.cs" />
     <Compile Include="Migrations\20200914083251_Init4.designer.cs">
       <DependentUpon>20200914083251_Init4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200917103615_17092020.cs" />
+    <Compile Include="Migrations\20200917103615_17092020.designer.cs">
+      <DependentUpon>20200917103615_17092020.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ContextAppModelSnapshot.cs" />
     <Compile Include="Program.cs" />

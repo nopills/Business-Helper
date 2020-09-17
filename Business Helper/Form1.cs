@@ -30,8 +30,12 @@ namespace Business_Helper
                      
             // Подгрузка из БД покупателей
             comboBox2.Items.Clear();
-            comboBox2.Items.AddRange(DbEditor.GetAllCustomers());          
-            
+            comboBox2.Items.AddRange(DbEditor.GetAllCustomers());
+
+            // Подгрузка из БД валюты
+            comboBox3.Items.Clear();
+            comboBox3.Items.AddRange(DbEditor.GetAllCurrency());
+           
             //contextMenu.Click += new EventHandler(OnAddItem);
         }
 
