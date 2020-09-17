@@ -43,6 +43,10 @@ namespace Business_Helper
                     CorpAcc = textBox9.Text
                 };
                 DbEditor.AddCustomer(customer);
+               
+                Form1 MainForm = (Form1)this.Owner;
+                MainForm.comboBox2.Items.Clear();
+                MainForm.comboBox2.Items.AddRange(DbEditor.GetAllCustomers());
                 this.Hide();
             }
             else

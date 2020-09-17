@@ -138,7 +138,7 @@ namespace Business_Helper
         {
             using (var context = new ContextApp())
             {
-                return context.Customers.Select(x => x.Name).ToArray();
+                return context.Currencies.Select(x => x.Name).ToArray();
             }
         }
         public static Currency GetCurrencyById(int id)

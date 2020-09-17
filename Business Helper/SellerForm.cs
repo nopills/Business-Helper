@@ -38,11 +38,20 @@ namespace Business_Helper
                     CorpAcc = textBox9.Text
                 };
                 DbEditor.AddSeller(seller);
+
+                Form1 MainForm = (Form1)this.Owner;
+                MainForm.comboBox1.Items.Clear();
+                MainForm.comboBox1.Items.AddRange(DbEditor.GetAllSellers());
                 this.Hide();
             } else
                MessageBox.Show("Присутствуют незаполненные поля", "Внимание",
                MessageBoxButtons.OK,
                MessageBoxIcon.Error);
+
+        }
+
+        private void SellerForm_Load(object sender, EventArgs e)
+        {
 
         }
     }
