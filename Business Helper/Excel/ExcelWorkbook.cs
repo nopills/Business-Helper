@@ -12,7 +12,14 @@ namespace Business_Helper.Excel
 {
     class ExcelWorkbook
     {
-        public string NewFile()
+
+
+        public void AddInfo()
+        {
+
+        }
+        
+        public string CreateFile()
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 

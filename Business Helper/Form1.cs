@@ -1,11 +1,14 @@
 ﻿using Business_Helper.EF.Models;
 using Business_Helper.Excel;
+using Business_Helper.Resources;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -213,6 +216,38 @@ namespace Business_Helper
         {
             Seller seller = DbEditor.GetSellerById(1);
             textBox1.Text += seller.Name;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string examplePath = Directory.CreateDirectory(Application.StartupPath + "/Example").FullName;
+            
+            if (!File.Exists("Factura.xlsx"))
+            {            
+                File.WriteAllBytes($"{examplePath}/Factura.xlsx", Resource.Factura);               
+            }
+
+            ExcelWorkbook WorkBook = new ExcelWorkbook(examplePath);
+
+            using (SaveFileDialog SaveFileDialog = new SaveFileDialog())
+            {
+                SaveFileDialog.Filter = "Файлы Excel (*.xls; *.xlsx) | *.xls; *.xlsx";
+                if (SaveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string FilePath = SaveFileDialog.FileName;
+                }
+            }
+            
+                    
+        }
+
+        private void button6_Click_1(object sender, EventArgs e)
+        {
+            
+               
+               
+            
+          
         }
     }
 }
