@@ -278,5 +278,12 @@ namespace Business_Helper
             
           
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            CurrencyForm CustomerForm = new CurrencyForm();
+            CustomerForm.Owner = this;
+            CustomerForm.Show();
+        }
     }
 }

@@ -178,6 +178,12 @@
       <DependentUpon>AllProductForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CalculateVAT.cs" />
+    <Compile Include="CurrencyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CurrencyForm.Designer.cs">
+      <DependentUpon>CurrencyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,6 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AllProductForm.resx">
       <DependentUpon>AllProductForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CurrencyForm.resx">
+      <DependentUpon>CurrencyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerForm.resx">
       <DependentUpon>CustomerForm.cs</DependentUpon>
