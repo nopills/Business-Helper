@@ -78,6 +78,7 @@ namespace Business_Helper
         {
             using (var context = new ContextApp())
             {
+                
                 return context.Sellers.Select(x => x.Name).ToArray();
             }
         }

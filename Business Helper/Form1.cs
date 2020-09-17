@@ -21,13 +21,14 @@ namespace Business_Helper
         public Form1()
         {
             InitializeComponent();
+           
             AddToolStripMenuItem.Click += new EventHandler(OnAddItem);
             RemoveToolStripMenuItem.Click += new EventHandler(RemoveItem);
 
             // Подгрузка из БД продавцов
             comboBox1.Items.Clear();
             comboBox1.Items.AddRange(DbEditor.GetAllSellers());
-                     
+
             // Подгрузка из БД покупателей
             comboBox2.Items.Clear();
             comboBox2.Items.AddRange(DbEditor.GetAllCustomers());
@@ -35,7 +36,6 @@ namespace Business_Helper
             // Подгрузка из БД валюты
             comboBox3.Items.Clear();
             comboBox3.Items.AddRange(DbEditor.GetAllCurrency());
-           
             //contextMenu.Click += new EventHandler(OnAddItem);
         }
 

@@ -280,6 +280,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\BH.db" />
     <None Include="Resources\Factura.xlsx" />
   </ItemGroup>
   <ItemGroup>
