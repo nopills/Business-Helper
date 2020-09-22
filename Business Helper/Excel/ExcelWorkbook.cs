@@ -8,22 +8,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business_Helper.EF.Models;
+using Business_Helper.Data;
 
 namespace Business_Helper.Excel
 {
     class ExcelWorkbook
     {
-        public ExcelWorkbook(string examplePath, Seller Seller, Customer Customer)
-        {
+       
+        public ExcelWorkbook(string examplePath, Seller Seller, Customer Customer, List<ProductInfo> Products)
+        {            
             _examplePath = examplePath;
             this.Seller = Seller;
-            this.Customer = Customer;
-  
+            this.Customer = Customer;       
+            this.Products = Products;
+            
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         }
+        
         private Seller Seller;
         private Customer Customer;
-
+        private List<ProductInfo> Products;
+       
         private string _examplePath { get; set; }
         public string facturaNumber { get; set; }
         public string facturaDate { get; set; }
@@ -32,7 +37,7 @@ namespace Business_Helper.Excel
         public string Currency { get; set; }
         public string currencyCode { get; set; }
       
-        public List<Product> Products = new List<Product>();
+        
         
         /*
       
@@ -55,7 +60,10 @@ namespace Business_Helper.Excel
             using (var package = new ExcelPackage(new FileInfo(_examplePath)))
             {
                 var worksheet = package.Workbook.Worksheets[0];
-              
+                worksheet.Cells.Style.Font.Size = 7;
+                worksheet.Cells.Style.Font.Name = "Arial";
+               
+
                 worksheet.Cells["A2"].Value = $"Счет-фактура № {facturaNumber} от {facturaDate}";
                 worksheet.Cells["A4"].Value = $"Продавец: {Seller.Name}\n" +
                     $"Адрес: {Seller.Adress}\n" +
@@ -69,10 +77,40 @@ namespace Business_Helper.Excel
                     $"Идентификатор государственного контракта, договора (соглашения) (при наличии):";
                 // worksheet.Cells["E9"].Value = $"{Unit.Name}";
                 //  worksheet.Cells["G9"].Value = $"{Unit.Code}";
-                worksheet.Cells["E9"].Value = $"222";
-                worksheet.Cells["E10"].Value = $"223";
-                worksheet.Cells["E11"].Value = $"224";
-                FileInfo xsFile = new FileInfo(filePath);
+                
+                int cellsCounter = 8;
+                
+                for(int i = 0; i < Products.Count; i++)
+                {
+                    cellsCounter++;
+                    worksheet.Cells["A" + cellsCounter + ":C" + cellsCounter].Merge = true;                  
+                    worksheet.Cells["A"+(cellsCounter)].Value = Products[i].Product.Name;               
+                    worksheet.Cells["E"+ cellsCounter].Value = Products[i].Product.UnitCode;
+                    worksheet.Cells["E"+ cellsCounter+":F"+ cellsCounter].Merge = true;
+                    worksheet.Cells["G"+ cellsCounter].Value = Products[i].Product.UnitName;
+                    worksheet.Cells["H"+ cellsCounter].Value = Products[i].Count;
+                    worksheet.Cells["I"+ cellsCounter].Value = Products[i].Product.Price;
+                    worksheet.Cells["J"+ cellsCounter].Value = Products[i].Product.Price;
+                    worksheet.Cells["J"+ cellsCounter+":K"+ cellsCounter].Merge = true;
+                    worksheet.Cells["L"+ cellsCounter].Value = "без";
+                    worksheet.Cells["M"+cellsCounter].Value = Products[i].Product.VAT;
+                    worksheet.Cells["N"+cellsCounter].Value = Products[i].vatSumm;
+                    worksheet.Cells["N"+ cellsCounter+":O"+cellsCounter].Merge = true;
+                    worksheet.Cells["P"+cellsCounter].Value = Products[i].summWithVat;
+                    worksheet.Cells["Q"+cellsCounter].Value = "---";
+                    worksheet.Cells["Q"+ cellsCounter+":S"+cellsCounter].Merge = true;
+                    worksheet.Cells["T"+cellsCounter].Value = "---";
+                    worksheet.Cells["U"+cellsCounter].Value = "---";
+
+                    worksheet.Cells["A9:C9"].s
+                    //worksheet.Cells["A" + cellsCounter + ":C" + cellsCounter].Style.Border.BorderAround(ExcelBorderStyle.Thin);
+                }
+
+
+               
+
+
+                    FileInfo xsFile = new FileInfo(filePath);
 
                 package.SaveAs(xsFile);
 

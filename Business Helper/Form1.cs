@@ -1,4 +1,5 @@
-﻿using Business_Helper.EF.Models;
+﻿using Business_Helper.Data;
+using Business_Helper.EF.Models;
 using Business_Helper.Excel;
 using Business_Helper.Resources;
 using System;
@@ -48,9 +49,9 @@ namespace Business_Helper
             if (dataGrid.CurrentRow != null)
             {
                 int SelectedIndex = dataGrid.CurrentRow.Index;
-                dataGrid.Rows.RemoveAt(SelectedIndex); //dataGrid.SelectedCells[0].RowIndex
-                string SelectedValue = dataGrid[0, SelectedIndex].Value.ToString();
-                Data.ProductList.Remove(DbEditor.GetItemByName(SelectedValue));
+               dataGrid.Rows.RemoveAt(SelectedIndex); //dataGrid.SelectedCells[0].RowIndex
+                //string SelectedValue = dataGrid[0, SelectedIndex].Value.ToString();
+                //Datas.ProductInfoList.remo(DbEditor.GetItemByName(SelectedValue));
             }
                
         }
@@ -228,7 +229,21 @@ namespace Business_Helper
 
         private void button5_Click(object sender, EventArgs e)
         {
-         
+            List<ProductInfo> ProductsInfo = new List<ProductInfo>();
+
+            for (int i = 0; i < dataGrid.Rows.Count - 1; i++)
+            {
+                ProductInfo ProductInfo = new ProductInfo
+                {
+                    Product = DbEditor.GetItemByName(dataGrid[0, i].Value.ToString()),
+                    Count = Convert.ToInt32(dataGrid[1, i].Value),
+                    vatSumm = dataGrid[6, i].Value.ToString(),
+                    summWithVat = dataGrid[5, i].Value.ToString()
+                };
+                ProductsInfo.Add(ProductInfo);
+            }
+
+            textBox1.Text += ProductsInfo[0].Product.Name + Environment.NewLine;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -256,9 +271,23 @@ namespace Business_Helper
                 Seller Seller = DbEditor.GetSellerById(sellerId);
                 Customer Customer = DbEditor.GetCustomerById(customerId);
                 Currency Currency = DbEditor.GetCurrencyById(currencyId);
-       
+                List<ProductInfo> ProductsInfo = new List<ProductInfo>();
+              
+                for(int i = 0; i < dataGrid.Rows.Count - 1; i++)
+                {
+                    ProductInfo ProductInfo = new ProductInfo
+                    {
+                        Product = DbEditor.GetItemByName(dataGrid[0, i].Value.ToString()),
+                        Count = Convert.ToInt32(dataGrid[1, i].Value),
+                        vatSumm = dataGrid[6, i].Value.ToString(),
+                        summWithVat = dataGrid[5, i].Value.ToString()
+                    };
+                    ProductsInfo.Add(ProductInfo);
+                }
+
+               
                 
-                ExcelWorkbook WorkBook = new ExcelWorkbook($"{examplePath}/Factura.xlsx", Seller, Customer);
+                ExcelWorkbook WorkBook = new ExcelWorkbook($"{examplePath}/Factura.xlsx", Seller, Customer, ProductsInfo);
         
               
                 WorkBook.facturaNumber = numericUpDown1.Value.ToString();
@@ -267,7 +296,10 @@ namespace Business_Helper
                 WorkBook.payDocumentDate = dateTimePicker2.Value.ToString("dd MMMM yyyy"); ;
                 WorkBook.currencyCode = Currency.Code;
                 WorkBook.Currency = Currency.Name;
-                WorkBook.Products = Data.ProductList;
+
+              
+
+                // WorkBook.Products = Datas.ProductList;
 
 
 

@@ -1,4 +1,5 @@
-﻿using Business_Helper.EF.Models;
+﻿using Business_Helper.Data;
+using Business_Helper.EF.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -59,7 +60,7 @@ namespace Business_Helper
                     vatWithoutPrice = Math.Round(vatWithoutPrice * CountOfItem, 2);
                     mainFrm.dataGrid.Rows.Add(NameOfItem, CountOfItem, UnitOfItem, String.Format("{0:0.00}", PriceOfItem), VATPercent, String.Format("{0:0.00}", SummItemsPrice), vatWithoutPrice, priceWithoutVat);
                     
-                    Data.ProductList.Add(DbEditor.GetItemById(comboBoxItems.SelectedIndex + 1));
+                    
                    
                     //mainFrm.lblVAT.Text = String.Format("{0:0.00}", vatWithoutPrice * CountOfItem);
                     // mainFrm.ChangedSummLabel = String.Format("{0:0.00}", SummItemsPrice);
