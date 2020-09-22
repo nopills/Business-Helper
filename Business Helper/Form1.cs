@@ -14,14 +14,18 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Business_Helper
 {
     public partial class Form1 : Form
     {
+       
         public Form1()
         {
             InitializeComponent();
-           
+
+            
+            
             AddToolStripMenuItem.Click += new EventHandler(OnAddItem);
             RemoveToolStripMenuItem.Click += new EventHandler(RemoveItem);
 
@@ -42,7 +46,13 @@ namespace Business_Helper
         private void RemoveItem(object sender, EventArgs e)
         {
             if (dataGrid.CurrentRow != null)
-                dataGrid.Rows.RemoveAt(dataGrid.CurrentRow.Index); //dataGrid.SelectedCells[0].RowIndex
+            {
+                int SelectedIndex = dataGrid.CurrentRow.Index;
+                dataGrid.Rows.RemoveAt(SelectedIndex); //dataGrid.SelectedCells[0].RowIndex
+                string SelectedValue = dataGrid[0, SelectedIndex].Value.ToString();
+                Data.ProductList.Remove(DbEditor.GetItemByName(SelectedValue));
+            }
+               
         }
 
         private void OnAddItem(object sender, EventArgs e)
@@ -218,7 +228,7 @@ namespace Business_Helper
 
         private void button5_Click(object sender, EventArgs e)
         {
-            textBox1.Text = comboBox1.SelectedIndex.ToString();
+         
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -246,9 +256,9 @@ namespace Business_Helper
                 Seller Seller = DbEditor.GetSellerById(sellerId);
                 Customer Customer = DbEditor.GetCustomerById(customerId);
                 Currency Currency = DbEditor.GetCurrencyById(currencyId);
-                Unit Unit = DbEditor.GetUnitById(unitId);
+       
                 
-                ExcelWorkbook WorkBook = new ExcelWorkbook($"{examplePath}/Factura.xlsx", Seller, Customer, Unit);
+                ExcelWorkbook WorkBook = new ExcelWorkbook($"{examplePath}/Factura.xlsx", Seller, Customer);
         
               
                 WorkBook.facturaNumber = numericUpDown1.Value.ToString();
@@ -257,6 +267,8 @@ namespace Business_Helper
                 WorkBook.payDocumentDate = dateTimePicker2.Value.ToString("dd MMMM yyyy"); ;
                 WorkBook.currencyCode = Currency.Code;
                 WorkBook.Currency = Currency.Name;
+                WorkBook.Products = Data.ProductList;
+
 
 
                 using (SaveFileDialog SaveFileDialog = new SaveFileDialog())

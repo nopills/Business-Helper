@@ -13,17 +13,17 @@ namespace Business_Helper.Excel
 {
     class ExcelWorkbook
     {
-        public ExcelWorkbook(string examplePath, Seller Seller, Customer Customer, Unit Unit)
+        public ExcelWorkbook(string examplePath, Seller Seller, Customer Customer)
         {
             _examplePath = examplePath;
             this.Seller = Seller;
             this.Customer = Customer;
-            this.Unit = Unit;
+  
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         }
         private Seller Seller;
         private Customer Customer;
-        private Unit Unit;
+
         private string _examplePath { get; set; }
         public string facturaNumber { get; set; }
         public string facturaDate { get; set; }
@@ -31,6 +31,9 @@ namespace Business_Helper.Excel
         public string payDocumentDate { get; set; }
         public string Currency { get; set; }
         public string currencyCode { get; set; }
+      
+        public List<Product> Products = new List<Product>();
+        
         /*
       
 
@@ -64,8 +67,11 @@ namespace Business_Helper.Excel
                     $"ИНН / КПП покупателя: {Customer.INN} / {Customer.KPP}\n" +
                     $"Валюта: наименование, код: {Currency}, {currencyCode}\n" +
                     $"Идентификатор государственного контракта, договора (соглашения) (при наличии):";
-                worksheet.Cells["E9"].Value = $"{Unit.Name}";
-                worksheet.Cells["G9"].Value = $"{Unit.Code}";
+                // worksheet.Cells["E9"].Value = $"{Unit.Name}";
+                //  worksheet.Cells["G9"].Value = $"{Unit.Code}";
+                worksheet.Cells["E9"].Value = $"222";
+                worksheet.Cells["E10"].Value = $"223";
+                worksheet.Cells["E11"].Value = $"224";
                 FileInfo xsFile = new FileInfo(filePath);
 
                 package.SaveAs(xsFile);

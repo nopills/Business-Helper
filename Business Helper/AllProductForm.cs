@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Business_Helper.EF.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +13,7 @@ namespace Business_Helper
 {
     public partial class AllProductForm : Form
     {
-
+        //public List<Product> ProductList;
         public AllProductForm()
         {
             InitializeComponent();
@@ -57,6 +58,9 @@ namespace Business_Helper
                     priceWithoutVat = Math.Round(priceWithoutVat * CountOfItem, 2);
                     vatWithoutPrice = Math.Round(vatWithoutPrice * CountOfItem, 2);
                     mainFrm.dataGrid.Rows.Add(NameOfItem, CountOfItem, UnitOfItem, String.Format("{0:0.00}", PriceOfItem), VATPercent, String.Format("{0:0.00}", SummItemsPrice), vatWithoutPrice, priceWithoutVat);
+                    
+                    Data.ProductList.Add(DbEditor.GetItemById(comboBoxItems.SelectedIndex + 1));
+                   
                     //mainFrm.lblVAT.Text = String.Format("{0:0.00}", vatWithoutPrice * CountOfItem);
                     // mainFrm.ChangedSummLabel = String.Format("{0:0.00}", SummItemsPrice);
                     //  mainFrm.ChangeVATLabel = String.Format("{0:0.00}", SummVAT);

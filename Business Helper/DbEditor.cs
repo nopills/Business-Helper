@@ -49,6 +49,21 @@ namespace Business_Helper
             }
         }
 
+        public static Product GetItemById(int itemId)
+        {
+            using (var context = new ContextApp())
+            {
+                return context.Products.FirstOrDefault(x => x.Id == itemId);
+            }
+        }
+
+        public static Product GetItemByName(string name)
+        {
+            using (var context = new ContextApp())
+            {
+                return context.Products.FirstOrDefault(x => x.Name == name);
+            }
+        }
        
         public static (double, double, string, string) GetItem(string Name)
         {
