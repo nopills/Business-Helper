@@ -102,7 +102,10 @@ namespace Business_Helper.Excel
                     worksheet.Cells["T"+cellsCounter].Value = "---";
                     worksheet.Cells["U"+cellsCounter].Value = "---";
 
-                    worksheet.Cells["A9:C9"].s
+                    worksheet.Cells["A9:U9"].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A9:U9"].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A9:U9"].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A9:U9"].Style.Border.Left.Style = ExcelBorderStyle.Thin;
                     //worksheet.Cells["A" + cellsCounter + ":C" + cellsCounter].Style.Border.BorderAround(ExcelBorderStyle.Thin);
                 }
 
