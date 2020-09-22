@@ -9,7 +9,8 @@ namespace Business_Helper
 {
     public static class DbEditor
     {
-        public static void AddItem(string Name, double Price, double VAT, string Unit)
+      
+        public static void AddItem(string Name, double Price, double VAT, string UnitName, string UnitCode)
         {
             using (var context = new ContextApp())
             {
@@ -19,20 +20,22 @@ namespace Business_Helper
                         Name = Name,
                         Price = Price,
                         VAT = VAT,
-                        Unit = Unit
+                        UnitName = UnitName,
+                        UnitCode = UnitCode
                     });
                 context.SaveChanges();
             }
         }
 
-        public static void AddUnit(string Name)
+        public static void AddUnit(string Name, string Code)
         {
             using (var context = new ContextApp())
             {
                 context.Add(
                     new Unit
                     {
-                        Name = Name,                      
+                        Name = Name,
+                        Code = Code
                     });
                 context.SaveChangesAsync();
             }
@@ -46,22 +49,24 @@ namespace Business_Helper
             }
         }
 
-        public static (double, double, string) GetItem(string Name)
+       
+        public static (double, double, string, string) GetItem(string Name)
         {
             double Price = default;
             double VAT = default;
-            string Unit = String.Empty;
-
+            string UnitName = String.Empty;
+            string UnitCode = String.Empty;
             using (var context = new ContextApp())
             {
-                var res = context.Products.Where(x => x.Name == Name).Select(a => new { prc = a.Price, unt = a.Unit, vat = a.VAT } );
+                var res = context.Products.Where(x => x.Name == Name).Select(y => new { prc = y.Price, untcode = y.UnitCode, unt = y.UnitName, vat = y.VAT } );               
                 foreach (var a in res)
                 {
                     Price = a.prc;
                     VAT = a.vat;
-                    Unit = a.unt;
+                    UnitName = a.unt;
+                    UnitCode = a.untcode;
                 }
-                return (Price, VAT, Unit);
+                return (Price, VAT, UnitName, UnitCode);
             }
            
             
@@ -71,6 +76,14 @@ namespace Business_Helper
             using (var context = new ContextApp())
             {
                 return context.Units.Select(x => x.Name).ToArray();
+            }
+        }
+
+        public static Unit GetUnitById(int id)
+        {
+            using (var context = new ContextApp())
+            {
+                return context.Units.FirstOrDefault(x => x.Id == id);
             }
         }
 

@@ -226,6 +226,7 @@ namespace Business_Helper
             int sellerId = comboBox1.SelectedIndex + 1;
             int customerId = comboBox2.SelectedIndex + 1;
             int currencyId = comboBox3.SelectedIndex + 1;
+            int unitId = comboBox3.SelectedIndex + 1;
             if (sellerId <= 0 && customerId <= 0 && currencyId <= 0)
             {
                 MessageBox.Show("Выберите продавца, покупателя и валюту из существующих или добавьте новые.", "Внимание",
@@ -245,8 +246,9 @@ namespace Business_Helper
                 Seller Seller = DbEditor.GetSellerById(sellerId);
                 Customer Customer = DbEditor.GetCustomerById(customerId);
                 Currency Currency = DbEditor.GetCurrencyById(currencyId);
+                Unit Unit = DbEditor.GetUnitById(unitId);
                 
-                ExcelWorkbook WorkBook = new ExcelWorkbook($"{examplePath}/Factura.xlsx", Seller, Customer);
+                ExcelWorkbook WorkBook = new ExcelWorkbook($"{examplePath}/Factura.xlsx", Seller, Customer, Unit);
         
               
                 WorkBook.facturaNumber = numericUpDown1.Value.ToString();

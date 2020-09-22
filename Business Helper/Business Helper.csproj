@@ -204,25 +204,9 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20200428095707_Init1.cs" />
-    <Compile Include="Migrations\20200428095707_Init1.designer.cs">
-      <DependentUpon>20200428095707_Init1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20200428105955_Init2.cs" />
-    <Compile Include="Migrations\20200428105955_Init2.designer.cs">
-      <DependentUpon>20200428105955_Init2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20200428112428_init3.cs" />
-    <Compile Include="Migrations\20200428112428_init3.designer.cs">
-      <DependentUpon>20200428112428_init3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20200914083251_Init4.cs" />
-    <Compile Include="Migrations\20200914083251_Init4.designer.cs">
-      <DependentUpon>20200914083251_Init4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20200917103615_17092020.cs" />
-    <Compile Include="Migrations\20200917103615_17092020.designer.cs">
-      <DependentUpon>20200917103615_17092020.cs</DependentUpon>
+    <Compile Include="Migrations\20200922060415_220920.cs" />
+    <Compile Include="Migrations\20200922060415_220920.designer.cs">
+      <DependentUpon>20200922060415_220920.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ContextAppModelSnapshot.cs" />
     <Compile Include="Program.cs" />

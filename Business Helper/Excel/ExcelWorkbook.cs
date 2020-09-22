@@ -13,15 +13,17 @@ namespace Business_Helper.Excel
 {
     class ExcelWorkbook
     {
-        public ExcelWorkbook(string examplePath, Seller Seller, Customer Customer)
+        public ExcelWorkbook(string examplePath, Seller Seller, Customer Customer, Unit Unit)
         {
             _examplePath = examplePath;
             this.Seller = Seller;
             this.Customer = Customer;
+            this.Unit = Unit;
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         }
         private Seller Seller;
         private Customer Customer;
+        private Unit Unit;
         private string _examplePath { get; set; }
         public string facturaNumber { get; set; }
         public string facturaDate { get; set; }
@@ -62,7 +64,8 @@ namespace Business_Helper.Excel
                     $"ИНН / КПП покупателя: {Customer.INN} / {Customer.KPP}\n" +
                     $"Валюта: наименование, код: {Currency}, {currencyCode}\n" +
                     $"Идентификатор государственного контракта, договора (соглашения) (при наличии):";
-
+                worksheet.Cells["E9"].Value = $"{Unit.Name}";
+                worksheet.Cells["G9"].Value = $"{Unit.Code}";
                 FileInfo xsFile = new FileInfo(filePath);
 
                 package.SaveAs(xsFile);

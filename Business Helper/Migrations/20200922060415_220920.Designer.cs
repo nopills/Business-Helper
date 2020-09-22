@@ -8,14 +8,31 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Business_Helper.Migrations
 {
     [DbContext(typeof(ContextApp))]
-    [Migration("20200914083251_Init4")]
-    partial class Init4
+    [Migration("20200922060415_220920")]
+    partial class _220920
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.3");
+
+            modelBuilder.Entity("Business_Helper.EF.Models.Currency", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Currencies");
+                });
 
             modelBuilder.Entity("Business_Helper.EF.Models.Customer", b =>
                 {
@@ -67,7 +84,10 @@ namespace Business_Helper.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("REAL");
 
-                    b.Property<string>("Unit")
+                    b.Property<string>("UnitCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UnitName")
                         .HasColumnType("TEXT");
 
                     b.Property<double>("VAT")
@@ -121,6 +141,9 @@ namespace Business_Helper.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");

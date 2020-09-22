@@ -12,7 +12,7 @@ namespace Business_Helper.EF.Models
         public string Name { get; set; }
         public double Price { get; set; }
         public double VAT { get; set; }
-        public string Unit { get; set; }
-
+        public string UnitName { get; set; }
+        public string UnitCode { get; set; }
     }
 }

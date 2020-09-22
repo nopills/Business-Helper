@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Business_Helper.EF.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -34,7 +36,8 @@ namespace Business_Helper
             AllProductForm AllProductFrm = (AllProductForm)this.Owner;
             if (File.Exists(DbPath))
             {
-                DbEditor.AddItem(textBoxStuffName.Text, Convert.ToDouble(textBoxPrice.Text), Convert.ToDouble(textBoxVAT.Text), comboBoxUnit.Text);                            
+                Unit Unit = DbEditor.GetUnitById(comboBoxUnit.SelectedIndex + 1);
+                DbEditor.AddItem(textBoxStuffName.Text, Convert.ToDouble(textBoxPrice.Text), Convert.ToDouble(textBoxVAT.Text), Unit.Name, Unit.Code);                            
                 AllProductFrm.comboBoxItems.Items.Clear();
                 AllProductFrm.comboBoxItems.Items.AddRange(DbEditor.GetAllItems());
                 this.Hide();
@@ -62,6 +65,12 @@ namespace Business_Helper
         private void AddProductForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+           // Unit unt = DbEditor.GetUnitById(1);
+           // MessageBox.Show(unt.Id + " " + unt.Name+" "+unt.Code + " "+comboBox2.SelectedIndex) ;
         }
     }
 }

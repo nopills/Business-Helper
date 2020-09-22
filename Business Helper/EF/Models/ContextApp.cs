@@ -13,6 +13,7 @@ namespace Business_Helper.EF.Models
         public ContextApp()
         {
             Database.EnsureCreated();
+           
         }
         public  DbSet<Product> Products { get; set; }
         public DbSet<Unit> Units { get; set; }

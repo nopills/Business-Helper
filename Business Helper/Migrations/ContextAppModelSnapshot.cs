@@ -82,7 +82,10 @@ namespace Business_Helper.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("REAL");
 
-                    b.Property<string>("Unit")
+                    b.Property<string>("UnitCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UnitName")
                         .HasColumnType("TEXT");
 
                     b.Property<double>("VAT")
@@ -136,6 +139,9 @@ namespace Business_Helper.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
