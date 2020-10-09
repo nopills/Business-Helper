@@ -47,12 +47,10 @@ namespace Business_Helper
 
             Form1 mainFrm = (Form1)this.Owner;
             if (comboBoxItems.Text.Length != 0 && textBoxCount.Text.Length != 0 && textBoxPrice.Text.Length != 0 && textBoxVAT.Text.Length != 0 && comboBox2.Text.Length != 0)
-            {
-                if (comboBox2.SelectedIndex == 1)
-                {
-                    CalculateVAT vatCalculator = new CalculateVAT(PriceOfItem, VATPercent);
+            {             
+                    CalculateVAT vatCalculator = new CalculateVAT(PriceOfItem, VATPercent, comboBox2.SelectedIndex);
                     double priceWithoutVat = vatCalculator.priceWithoutVat();
-                    double vatWithoutPrice = vatCalculator.vatSumm();
+                    double vatWithoutPrice = vatCalculator.checkVatSumm();
                     //MessageBox.Show((Math.Round(vatWithoutPrice * CountOfItem, 2)).ToString());
                     //double SummItemsPrice = VATCalc.SummItemsPrice(CalcVat, CountOfItem);
                     //double SummVAT = VATCalc.SummAllVat(VATPercent, CountOfItem);
@@ -64,8 +62,7 @@ namespace Business_Helper
                    
                     //mainFrm.lblVAT.Text = String.Format("{0:0.00}", vatWithoutPrice * CountOfItem);
                     // mainFrm.ChangedSummLabel = String.Format("{0:0.00}", SummItemsPrice);
-                    //  mainFrm.ChangeVATLabel = String.Format("{0:0.00}", SummVAT);
-                }
+                    //  mainFrm.ChangeVATLabel = String.Format("{0:0.00}", SummVAT);                
             }
         }
 

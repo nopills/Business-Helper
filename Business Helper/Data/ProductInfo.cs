@@ -13,5 +13,6 @@ namespace Business_Helper.Data
         public int Count { get; set; }
         public string vatSumm { get; set; }
         public string summWithVat { get; set; }
+        public string summWithoutVat { get; set; }
     }
 }

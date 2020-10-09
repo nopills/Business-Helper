@@ -49,7 +49,7 @@ namespace Business_Helper
             if (dataGrid.CurrentRow != null)
             {
                 int SelectedIndex = dataGrid.CurrentRow.Index;
-               dataGrid.Rows.RemoveAt(SelectedIndex); //dataGrid.SelectedCells[0].RowIndex
+                dataGrid.Rows.RemoveAt(SelectedIndex); //dataGrid.SelectedCells[0].RowIndex
                 //string SelectedValue = dataGrid[0, SelectedIndex].Value.ToString();
                 //Datas.ProductInfoList.remo(DbEditor.GetItemByName(SelectedValue));
             }
@@ -280,7 +280,8 @@ namespace Business_Helper
                         Product = DbEditor.GetItemByName(dataGrid[0, i].Value.ToString()),
                         Count = Convert.ToInt32(dataGrid[1, i].Value),
                         vatSumm = dataGrid[6, i].Value.ToString(),
-                        summWithVat = dataGrid[5, i].Value.ToString()
+                        summWithVat = dataGrid[5, i].Value.ToString(),
+                        summWithoutVat = dataGrid[7, i].Value.ToString()
                     };
                     ProductsInfo.Add(ProductInfo);
                 }

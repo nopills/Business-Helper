@@ -83,17 +83,19 @@ namespace Business_Helper.Excel
                 for(int i = 0; i < Products.Count; i++)
                 {
                     cellsCounter++;
+                    worksheet.Row(cellsCounter).Height = 15;
+
                     worksheet.Cells["A" + cellsCounter + ":C" + cellsCounter].Merge = true;                  
                     worksheet.Cells["A"+(cellsCounter)].Value = Products[i].Product.Name;               
                     worksheet.Cells["E"+ cellsCounter].Value = Products[i].Product.UnitCode;
                     worksheet.Cells["E"+ cellsCounter+":F"+ cellsCounter].Merge = true;
                     worksheet.Cells["G"+ cellsCounter].Value = Products[i].Product.UnitName;
                     worksheet.Cells["H"+ cellsCounter].Value = Products[i].Count;
-                    worksheet.Cells["I"+ cellsCounter].Value = Products[i].Product.Price;
-                    worksheet.Cells["J"+ cellsCounter].Value = Products[i].Product.Price;
+                    worksheet.Cells["I"+ cellsCounter].Value = Products[i].summWithoutVat;
+                    worksheet.Cells["J"+ cellsCounter].Value = Products[i].summWithoutVat;
                     worksheet.Cells["J"+ cellsCounter+":K"+ cellsCounter].Merge = true;
-                    worksheet.Cells["L"+ cellsCounter].Value = "без";
-                    worksheet.Cells["M"+cellsCounter].Value = Products[i].Product.VAT;
+                    worksheet.Cells["L"+ cellsCounter].Value = "без акциза";
+                    worksheet.Cells["M"+cellsCounter].Value = Products[i].Product.VAT + "%";
                     worksheet.Cells["N"+cellsCounter].Value = Products[i].vatSumm;
                     worksheet.Cells["N"+ cellsCounter+":O"+cellsCounter].Merge = true;
                     worksheet.Cells["P"+cellsCounter].Value = Products[i].summWithVat;
@@ -102,14 +104,14 @@ namespace Business_Helper.Excel
                     worksheet.Cells["T"+cellsCounter].Value = "---";
                     worksheet.Cells["U"+cellsCounter].Value = "---";
 
-                    worksheet.Cells["A9:U9"].Style.Border.Top.Style = ExcelBorderStyle.Thin;
-                    worksheet.Cells["A9:U9"].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
-                    worksheet.Cells["A9:U9"].Style.Border.Right.Style = ExcelBorderStyle.Thin;
-                    worksheet.Cells["A9:U9"].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A" + cellsCounter + ":U" + cellsCounter].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A" + cellsCounter + ":U" + cellsCounter].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A" + cellsCounter + ":U" + cellsCounter].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A" + cellsCounter + ":U" + cellsCounter].Style.Border.Left.Style = ExcelBorderStyle.Thin;
                     //worksheet.Cells["A" + cellsCounter + ":C" + cellsCounter].Style.Border.BorderAround(ExcelBorderStyle.Thin);
                 }
 
-
+               
                
 
 
