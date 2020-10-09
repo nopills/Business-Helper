@@ -23,20 +23,15 @@ namespace Business_Helper
                         UnitName = UnitName,
                         UnitCode = UnitCode
                     });
-                context.SaveChanges();
+                context.SaveChangesAsync();
             }
         }
 
-        public static void AddUnit(string Name, string Code)
+        public static void AddUnit(Unit Unit)
         {
             using (var context = new ContextApp())
             {
-                context.Add(
-                    new Unit
-                    {
-                        Name = Name,
-                        Code = Code
-                    });
+                context.Add(Unit);
                 context.SaveChangesAsync();
             }
         }
@@ -140,7 +135,7 @@ namespace Business_Helper
             using (var context = new ContextApp())
             {
                 context.Add(customer);
-                context.SaveChanges();
+                context.SaveChangesAsync();
             }
         }
 
@@ -149,7 +144,7 @@ namespace Business_Helper
             using (var context = new ContextApp())
             {
                 context.Add(seller);
-                context.SaveChanges();
+                context.SaveChangesAsync();
             }
         }
 
@@ -158,7 +153,7 @@ namespace Business_Helper
             using (var context = new ContextApp())
             {
                 context.Add(currency);
-                context.SaveChanges();
+                context.SaveChangesAsync();
             }
         }
 

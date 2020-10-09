@@ -36,5 +36,10 @@ namespace Business_Helper
             }
             
         }
+
+        private void CurrencyForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

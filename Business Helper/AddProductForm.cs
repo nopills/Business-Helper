@@ -72,5 +72,12 @@ namespace Business_Helper
            // Unit unt = DbEditor.GetUnitById(1);
            // MessageBox.Show(unt.Id + " " + unt.Name+" "+unt.Code + " "+comboBox2.SelectedIndex) ;
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            UnitForm UnitForm = new UnitForm();
+            UnitForm.Owner = this;
+            UnitForm.Show();
+        }
     }
 }

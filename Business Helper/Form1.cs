@@ -46,12 +46,12 @@ namespace Business_Helper
 
         private void RemoveItem(object sender, EventArgs e)
         {
-            if (dataGrid.CurrentRow != null)
+            if (dataGrid.CurrentRow != null && dataGrid.CurrentRow.Index != dataGrid.Rows.Count - 1)
             {
                 int SelectedIndex = dataGrid.CurrentRow.Index;
                 dataGrid.Rows.RemoveAt(SelectedIndex); //dataGrid.SelectedCells[0].RowIndex
                 //string SelectedValue = dataGrid[0, SelectedIndex].Value.ToString();
-                //Datas.ProductInfoList.remo(DbEditor.GetItemByName(SelectedValue));
+                //Datas.ProductInfoList.remo(DbEditor.GetItemByName(SelectedValue));             
             }
                
         }
