@@ -68,6 +68,8 @@ namespace Business_Helper
         private void button1_Click(object sender, EventArgs e)
         {
             double mysumm = 0;
+            double cellsSumm = 0;
+
             if (tbMySumm.Text == String.Empty || Convert.ToDouble(tbMySumm.Text) <= 0)
             {
                 MessageBox.Show("Значение суммы не может быть пустым и должно быть больше нуля.", "Внимание",
@@ -84,7 +86,13 @@ namespace Business_Helper
             else
             {
                 mysumm = Convert.ToDouble(tbMySumm.Text);
-                Summator summ = new Summator(mysumm, Convert.ToDouble(lblSumm.Text));
+                
+                foreach(DataGridViewRow row in dataGrid.Rows)
+                {
+                    cellsSumm += Convert.ToDouble(row.Cells[3].Value);
+                }    
+                
+                Summator summ = new Summator(mysumm, cellsSumm);
 
                 double cnt = summ.Count;
                 double priceWithoutVat = 0;
