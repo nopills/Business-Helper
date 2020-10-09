@@ -237,8 +237,8 @@ namespace Business_Helper
                 {
                     Product = DbEditor.GetItemByName(dataGrid[0, i].Value.ToString()),
                     Count = Convert.ToInt32(dataGrid[1, i].Value),
-                    vatSumm = dataGrid[6, i].Value.ToString(),
-                    summWithVat = dataGrid[5, i].Value.ToString()
+                    vatSumm = Convert.ToDouble(dataGrid[6, i].Value),
+                    summWithVat = Convert.ToDouble(dataGrid[5, i].Value)
                 };
                 ProductsInfo.Add(ProductInfo);
             }
@@ -279,9 +279,9 @@ namespace Business_Helper
                     {
                         Product = DbEditor.GetItemByName(dataGrid[0, i].Value.ToString()),
                         Count = Convert.ToInt32(dataGrid[1, i].Value),
-                        vatSumm = dataGrid[6, i].Value.ToString(),
-                        summWithVat = dataGrid[5, i].Value.ToString(),
-                        summWithoutVat = dataGrid[7, i].Value.ToString()
+                        vatSumm = Convert.ToDouble(dataGrid[6, i].Value),
+                        summWithVat = Convert.ToDouble(dataGrid[5, i].Value),
+                        summWithoutVat = Convert.ToDouble(dataGrid[7, i].Value)
                     };
                     ProductsInfo.Add(ProductInfo);
                 }

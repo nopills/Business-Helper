@@ -11,8 +11,8 @@ namespace Business_Helper.Data
     {
         public Product Product { get; set; }
         public int Count { get; set; }
-        public string vatSumm { get; set; }
-        public string summWithVat { get; set; }
-        public string summWithoutVat { get; set; }
+        public double vatSumm { get; set; }
+        public double summWithVat { get; set; }
+        public double summWithoutVat { get; set; }
     }
 }

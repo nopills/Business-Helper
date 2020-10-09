@@ -62,7 +62,7 @@ namespace Business_Helper.Excel
                 var worksheet = package.Workbook.Worksheets[0];
                 worksheet.Cells.Style.Font.Size = 7;
                 worksheet.Cells.Style.Font.Name = "Arial";
-               
+                worksheet.Row(6).Height = 40;
 
                 worksheet.Cells["A2"].Value = $"Счет-фактура № {facturaNumber} от {facturaDate}";
                 worksheet.Cells["A4"].Value = $"Продавец: {Seller.Name}\n" +
@@ -83,7 +83,7 @@ namespace Business_Helper.Excel
                 for(int i = 0; i < Products.Count; i++)
                 {
                     cellsCounter++;
-                    worksheet.Row(cellsCounter).Height = 15;
+                    worksheet.Row(cellsCounter).Height = 10;
 
                     worksheet.Cells["A" + cellsCounter + ":C" + cellsCounter].Merge = true;                  
                     worksheet.Cells["A"+(cellsCounter)].Value = Products[i].Product.Name;               
@@ -103,19 +103,85 @@ namespace Business_Helper.Excel
                     worksheet.Cells["Q"+ cellsCounter+":S"+cellsCounter].Merge = true;
                     worksheet.Cells["T"+cellsCounter].Value = "---";
                     worksheet.Cells["U"+cellsCounter].Value = "---";
-
+                    
                     worksheet.Cells["A" + cellsCounter + ":U" + cellsCounter].Style.Border.Top.Style = ExcelBorderStyle.Thin;
                     worksheet.Cells["A" + cellsCounter + ":U" + cellsCounter].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
                     worksheet.Cells["A" + cellsCounter + ":U" + cellsCounter].Style.Border.Right.Style = ExcelBorderStyle.Thin;
                     worksheet.Cells["A" + cellsCounter + ":U" + cellsCounter].Style.Border.Left.Style = ExcelBorderStyle.Thin;
-                    //worksheet.Cells["A" + cellsCounter + ":C" + cellsCounter].Style.Border.BorderAround(ExcelBorderStyle.Thin);
+                    
                 }
+                cellsCounter++;
+                worksheet.Row(cellsCounter).Height = 10;
+                worksheet.Cells["A" + cellsCounter + ":I" + cellsCounter].Merge = true;
+                worksheet.Cells["A" + cellsCounter + ":I" + cellsCounter].Value = "Всего к оплате:";
+                worksheet.Cells["J" + cellsCounter + ":K" + cellsCounter].Merge = true;
+                worksheet.Cells["J" + cellsCounter + ":K" + cellsCounter].Value = Products.Select(x => x.summWithoutVat).Sum();
 
+                worksheet.Cells["A" + cellsCounter + ":I" + cellsCounter].Style.Border.BorderAround(ExcelBorderStyle.Thin);
+                worksheet.Cells["J" + cellsCounter + ":K" + cellsCounter].Style.Border.BorderAround(ExcelBorderStyle.Thin);
+                worksheet.Cells["L" + cellsCounter + ":M" + cellsCounter].Style.Border.BorderAround(ExcelBorderStyle.Thin);
+                worksheet.Cells["L" + cellsCounter + ":M" + cellsCounter].Merge = true;
+                worksheet.Cells["N" + cellsCounter + ":O" + cellsCounter].Style.Border.BorderAround(ExcelBorderStyle.Thin);
+                worksheet.Cells["N" + cellsCounter + ":O" + cellsCounter].Merge = true;
+                worksheet.Cells["P" + cellsCounter].Style.Border.BorderAround(ExcelBorderStyle.Thin);
+
+                cellsCounter += 2;
+                worksheet.Row(cellsCounter).Height = 25;
+                worksheet.Cells["A" + cellsCounter].Value = "Руководитель организации\nили иное уполномоченное лицо";
+                worksheet.Cells["B" + cellsCounter + ":D" + cellsCounter].Merge = true;
+                worksheet.Cells["B" + cellsCounter + ":D" + cellsCounter].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells["F" + cellsCounter + ":I" + cellsCounter].Merge = true;
+                worksheet.Cells["F" + cellsCounter + ":I" + cellsCounter].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells["K" + cellsCounter + ":N" + cellsCounter].Merge = true;
+                worksheet.Cells["K" + cellsCounter].Value = "Главный бухгалтер\nили иное уполномоченное лицо";
+                worksheet.Cells["O" + cellsCounter + ":Q" + cellsCounter].Merge = true;
+                worksheet.Cells["O" + cellsCounter + ":Q" + cellsCounter].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells["S" + cellsCounter + ":U" + cellsCounter].Merge = true;
+                worksheet.Cells["S" + cellsCounter + ":U" + cellsCounter].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
                
-               
+                cellsCounter++;
+                worksheet.Row(cellsCounter).Height = 10;
+                worksheet.Cells["B" + cellsCounter + ":D" + cellsCounter].Merge = true;
+                worksheet.Cells["B" + cellsCounter + ":D" + cellsCounter].Value = "(подпись)";
+                worksheet.Cells["B" + cellsCounter].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                worksheet.Cells["F" + cellsCounter + ":I" + cellsCounter].Merge = true;
+                worksheet.Cells["F" + cellsCounter + ":I" + cellsCounter].Value = "(ф. и. о.)";
+                worksheet.Cells["F" + cellsCounter].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                worksheet.Cells["O" + cellsCounter + ":Q" + cellsCounter].Merge = true;
+                worksheet.Cells["O" + cellsCounter + ":Q" + cellsCounter].Value = "(ф. и. о.)";
+                worksheet.Cells["O" + cellsCounter].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                worksheet.Cells["S" + cellsCounter + ":U" + cellsCounter].Merge = true;
+                worksheet.Cells["S" + cellsCounter + ":U" + cellsCounter].Value = "(ф. и. о.)";
+                worksheet.Cells["S" + cellsCounter].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+                cellsCounter++;
+                worksheet.Row(cellsCounter).Height = 10;
+
+                cellsCounter++;
+                worksheet.Row(cellsCounter).Height = 30;
+                worksheet.Cells["A" + cellsCounter].Value = "Индивидуальный предприниматель или иное уполномоченное лицо";               
+                worksheet.Cells["B" + cellsCounter + ":D" + cellsCounter].Merge = true;
+                worksheet.Cells["B" + cellsCounter + ":D" + cellsCounter].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells["F" + cellsCounter + ":I" + cellsCounter].Merge = true;
+                worksheet.Cells["F" + cellsCounter + ":I" + cellsCounter].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;               
+                worksheet.Cells["K" + cellsCounter + ":U" + cellsCounter].Merge = true;           
+                worksheet.Cells["K" + cellsCounter + ":U" + cellsCounter].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+        
+
+                cellsCounter++;
+                worksheet.Row(cellsCounter).Height = 20;
+                worksheet.Cells["B" + cellsCounter + ":D" + cellsCounter].Merge = true;
+                worksheet.Cells["B" + cellsCounter].Value = "(подпись)";
+                worksheet.Cells["B" + cellsCounter].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                worksheet.Cells["F" + cellsCounter + ":I" + cellsCounter].Merge = true;
+                worksheet.Cells["F" + cellsCounter].Value = "(ф. и. о.)";
+                worksheet.Cells["F" + cellsCounter].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                worksheet.Cells["K" + cellsCounter + ":U" + cellsCounter].Merge = true;
+                worksheet.Cells["K" + cellsCounter].Value = "(реквизиты свидетельства о государственной\nрегистрации индивидуального предпринимателя)";
+                worksheet.Cells["K" + cellsCounter].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
 
 
-                    FileInfo xsFile = new FileInfo(filePath);
+                FileInfo xsFile = new FileInfo(filePath);
 
                 package.SaveAs(xsFile);
 
